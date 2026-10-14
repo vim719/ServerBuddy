@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 import MarketPulse from '@/components/MarketPulse'
 
 export const metadata: Metadata = {
-  title: 'Market Pulse | NimbleBuddy',
+  title: 'Market Pulse | ServerBuddy',
   description: 'Cited stock and crypto sentiment outlooks from the live web, powered by Nimbleway.',
 }
 

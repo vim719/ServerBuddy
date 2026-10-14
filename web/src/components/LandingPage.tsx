@@ -223,6 +223,12 @@ export default function LandingPage() {
   return (
     <div className="relative flex h-dvh min-h-screen flex-col overflow-hidden bg-background text-foreground">
       {!showConversation ? (
+        <header className="fixed left-0 top-0 z-40 flex items-center gap-2 px-4 py-4 md:px-6 md:py-6">
+          <span className="text-lg font-semibold tracking-tight text-primary">Serverpod</span>
+          <span className="text-xs font-medium uppercase tracking-wide text-muted-foreground">ServerBuddy</span>
+        </header>
+      ) : null}
+      {!showConversation ? (
         <div className="palette-bars" aria-hidden="true">
           <i />
           <i />
@@ -299,11 +305,11 @@ export default function LandingPage() {
         }`}
       >
         {!showConversation ? (
-          <span className="text-xs text-muted-foreground">Built with Claude · Gemini · Antigravity</span>
+          <span className="text-xs text-muted-foreground">Built with Flutter · Serverpod · Claude</span>
         ) : null}
         <div className="flex items-center justify-end gap-2 text-muted-foreground">
           <span className="text-xs font-medium uppercase tracking-wide">Powered by</span>
-          <span className="text-lg font-semibold tracking-tight text-primary">Nimbleway</span>
+          <span className="text-lg font-semibold tracking-tight text-primary">Serverpod</span>
         </div>
       </footer>
     </div>

@@ -1,0 +1,30 @@
+services:
+  # Development services
+  postgres:
+    image: ghcr.io/serverpod/postgres:16
+    ports:
+      - "8090:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_DB: serverbuddy
+      POSTGRES_PASSWORD: "ZNtgsimpaJFUe_Hw6MTNA1dv69TP6Z1c"
+    volumes:
+      - serverbuddy_data:/var/lib/postgresql/data
+
+
+  # Test services
+  postgres_test:
+    image: ghcr.io/serverpod/postgres:16
+    ports:
+      - "9090:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_DB: serverbuddy_test
+      POSTGRES_PASSWORD: "wXGtEkryfinB8Q8AlZwWU8p-1pyU9OIE"
+    volumes:
+      - serverbuddy_test_data:/var/lib/postgresql/data
+
+
+volumes:
+  serverbuddy_data:
+  serverbuddy_test_data:

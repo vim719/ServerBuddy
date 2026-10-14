@@ -1,3 +1,25 @@
+# ServerBuddy
+
+**ServerBuddy** is a voice companion ("Anna") with long-term memory, built on **Serverpod 4** and **Flutter**.
+
+## Serverpod + Flutter core (`serverbuddy/`)
+
+```
+serverbuddy/
+├── serverbuddy_server/   # Serverpod backend: MemoryEndpoint + Memory table (Postgres via the Serverpod ORM)
+├── serverbuddy_client/   # Generated type-safe Dart client
+└── serverbuddy_flutter/  # Flutter app (web/iOS/Android/desktop) that calls client.memory.*
+```
+
+- `Memory` model is defined in `memory.spy.yaml` with `table: memories`; Serverpod generates the shared Dart class and `Memory.db` ORM.
+- `MemoryEndpoint` exposes `remember`, `getMemories`, `forget`; the Flutter app calls them as `client.memory.remember(...)`.
+- Run locally: `cd serverbuddy && serverpod start` (embedded Postgres, hot reload, press `M` for migrations).
+- Deploy: `cd serverbuddy && serverpod cloud launch` (Serverpod Cloud hosts the server, database and the Flutter web build).
+
+The original voice/agent backend (FastAPI in `server/`, Next.js landing page in `web/`, Chrome extension in `extension/`) is kept unchanged.
+
+---
+
 # NimbleBuddy — Meet Anna
 
 **🌐 Showcase: [vim719.github.io/NimbleBuddy](https://vim719.github.io/NimbleBuddy/)**

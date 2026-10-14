@@ -1,0 +1,11 @@
+name: _
+publish_to: none
+
+environment:
+  sdk: '^3.12.2'
+
+workspace:
+  - serverbuddy_client
+  - serverbuddy_server
+  - serverbuddy_flutter
+

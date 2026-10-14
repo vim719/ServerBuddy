@@ -15,7 +15,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-	title: "Meet Anna | NimbleBuddy",
+	title: "Meet Anna | ServerBuddy",
 	description:
 		"A real-time AI companion voice call that remembers you across conversations.",
 	icons: {

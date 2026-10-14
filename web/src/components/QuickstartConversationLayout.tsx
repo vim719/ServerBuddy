@@ -28,7 +28,7 @@ export function QuickstartConversationLayout({
 				<div className="flex min-w-0 items-center gap-3">
 					<Image
 						src="/nimblebuddy-mark.svg"
-						alt="NimbleBuddy"
+						alt="ServerBuddy"
 						width={40}
 						height={40}
 						className="h-10 w-10 shrink-0 object-contain"

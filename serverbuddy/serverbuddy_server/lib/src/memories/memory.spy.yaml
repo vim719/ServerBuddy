@@ -1,0 +1,11 @@
+### A memory that Anna, the ServerBuddy companion, keeps about the user
+class: Memory
+### The database table that stores memories
+table: memories
+fields:
+  ### Who the memory belongs to
+  author: String
+  ### The memory text
+  text: String
+  ### The date the memory was saved
+  date: DateTime
