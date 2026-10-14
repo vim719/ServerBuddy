@@ -1,7 +1,7 @@
 # ServerBuddy — Hackathon Submission
 
 **Code repository:** https://github.com/vim719/ServerBuddy
-**Live app:** https://serverbuddy.serverpod.space  (replace with the URL printed by `serverpod cloud launch`)
+**Live app:** https://serverbuddy.serverpod.space (API: https://serverbuddy.api.serverpod.space)
 **Demo video:** <paste YouTube/Loom link, max 2 min>
 
 ## Project description
