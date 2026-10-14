@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>NimbleBuddy — Meet Anna</title>
-<meta name="description" content="NimbleBuddy: Anna, a real-time voice AI companion that remembers you and searches the live web. Powered by Nimbleway web search; built with Claude, Gemini and Antigravity." />
-<meta property="og:title" content="NimbleBuddy — Meet Anna" />
+<title>ServerBuddy — Meet Anna</title>
+<meta name="description" content="ServerBuddy: Anna, a real-time voice AI companion that remembers you and searches the live web. Powered by Serverpod; built with Flutter." />
+<meta property="og:title" content="ServerBuddy — Meet Anna" />
 <meta property="og:description" content="A real-time voice AI companion that remembers you and searches the live web." />
 <meta property="og:image" content="assets/web-call.jpg" />
 <link rel="icon" href="assets/icon.png" />
@@ -269,7 +269,7 @@
 <body>
 <nav>
   <div class="wrap">
-    <a class="brand" href="#"><img src="assets/icon.png" alt="" />NimbleBuddy</a>
+    <a class="brand" href="#"><img src="assets/icon.png" alt="" />Serverpod<span style="font-weight:500;opacity:.6;margin-left:.4em">ServerBuddy</span></a>
     <div class="nav-links">
       <a href="#features">Features</a>
       <a href="#demo">Demo</a>
@@ -277,7 +277,7 @@
       <a href="#built">Built with</a>
       <a href="#run">Run it</a>
     </div>
-    <a class="nav-cta" href="https://github.com/vim719/NimbleBuddy">GitHub</a>
+    <a class="nav-cta" href="https://github.com/vim719/ServerBuddy">GitHub</a>
   </div>
 </nav>
 
@@ -286,10 +286,11 @@
   <div class="wrap">
     <div class="eyebrow-top">Real-time voice · Memory · Live web search</div>
     <h1 aria-label="Meet Anna, the voice buddy who remembers you."><span class="letters" aria-hidden="true">Meet </span><span class="anna">Anna</span><span class="letters" aria-hidden="true">, the voice buddy who remembers you.</span></h1>
-    <p class="lede">NimbleBuddy is a voice-first AI companion. Talk to Anna out loud — she answers in under a second, picks up where your last call left off, and looks things up on the live web with Nimbleway.</p>
+    <p class="lede">ServerBuddy is a voice-first AI companion built on Serverpod and Flutter. Talk to Anna out loud — she answers in under a second, picks up where your last call left off, and looks things up on the live web.</p>
     <div class="cta">
-      <a class="btn btn-primary" href="https://github.com/vim719/NimbleBuddy">View the code →</a>
-      <a class="btn btn-ghost" href="assets/nimblebuddy-extension.zip" download>Download Chrome extension</a>
+      <a class="btn btn-primary" href="https://serverbuddy.serverpod.space/">Open the live app →</a>
+      <a class="btn btn-ghost" href="https://github.com/vim719/ServerBuddy">View the code</a>
+      <a class="btn btn-ghost" href="assets/serverbuddy-extension.zip" download>Download Chrome extension</a>
       <a class="btn btn-ghost" href="#run">Run it locally</a>
     </div>
     <div class="orb-stage" aria-hidden="true">
@@ -320,7 +321,7 @@
       <div class="card">
         <div class="icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></div>
         <h3>Live web search</h3>
-        <p>Ask about news, weather or anything recent. Anna calls Nimbleway's <code>nimble_search</code> tool over MCP and answers in a sentence or two.</p>
+        <p>Ask about news, weather or anything recent. Anna calls a live web search tool over MCP and answers in a sentence or two.</p>
       </div>
       <div class="card">
         <div class="icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M3 9h18M8 4v5"/></svg></div>
@@ -348,7 +349,7 @@
         </figure>
       </div>
       <figure class="shot popup">
-        <img src="assets/extension-popup.jpg" alt="NimbleBuddy Chrome extension popup" loading="lazy" />
+        <img src="assets/extension-popup.jpg" alt="ServerBuddy Chrome extension popup" loading="lazy" />
         <figcaption>Chrome extension popup — talk to Anna from any tab.</figcaption>
       </figure>
     </div>
@@ -363,11 +364,11 @@
       <div class="step"><b>You speak</b><span>Mic audio streams over a real-time channel.</span></div>
       <div class="step"><b>Transcribed</b><span>Deepgram nova-3 turns speech into text.</span></div>
       <div class="step"><b>Anna thinks</b><span>OpenAI with your memory in context.</span></div>
-      <div class="step"><b>Searches</b><span>Nimbleway MCP when she needs fresh facts.</span></div>
+      <div class="step"><b>Searches</b><span>Live web search over MCP when she needs fresh facts.</span></div>
       <div class="step"><b>Replies</b><span>MiniMax TTS speaks back in real time.</span></div>
     </div>
 
-    <div class="arch" role="img" aria-label="Architecture: the web app or Chrome extension talks to a FastAPI backend, which starts a real-time voice agent that uses Deepgram, OpenAI, Nimbleway and MiniMax; memory is stored in SQLite.">
+    <div class="arch" role="img" aria-label="Architecture: the web app or Chrome extension talks to a FastAPI backend, which starts a real-time voice agent that uses Deepgram, OpenAI, live web search and MiniMax; a Serverpod server with a Flutter app stores memories in Postgres.">
       <svg viewBox="0 0 900 260" xmlns="http://www.w3.org/2000/svg" font-family="Instrument Sans, sans-serif">
         <defs>
           <linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#1982c4"/><stop offset="1" stop-color="#6a4c93"/></linearGradient>
@@ -398,7 +399,7 @@
           <rect x="612" y="114" width="246" height="34" rx="9" fill="#f7f8fb" stroke="#e7e9f0"/>
           <text x="735" y="136" text-anchor="middle">OpenAI LLM + memory context</text>
           <rect x="612" y="156" width="246" height="34" rx="9" fill="#eaf4fb" stroke="#1982c4"/>
-          <text x="735" y="178" text-anchor="middle" fill="#1982c4" font-weight="600">Nimbleway web search (MCP)</text>
+          <text x="735" y="178" text-anchor="middle" fill="#1982c4" font-weight="600">Live web search (MCP)</text>
           <rect x="612" y="198" width="246" height="34" rx="9" fill="#f7f8fb" stroke="#e7e9f0"/>
           <text x="735" y="220" text-anchor="middle">MiniMax TTS</text>
         </g>
@@ -416,7 +417,10 @@
     </div>
 
     <div class="chips">
-      <span class="chip"><b>Nimbleway</b> MCP web search</span>
+      <span class="chip"><b>Serverpod 4</b> · Dart backend · Postgres ORM</span>
+      <span class="chip"><b>Flutter</b> app · web, iOS, Android</span>
+      <span class="chip"><b>Serverpod Cloud</b> hosting</span>
+      <span class="chip"><b>MCP</b> web search</span>
       <span class="chip"><b>Deepgram</b> · <b>OpenAI</b> · <b>MiniMax</b> voice pipeline</span>
       <span class="chip"><b>Next.js 16</b> · React 19</span>
       <span class="chip"><b>FastAPI</b> · Python</span>
@@ -429,12 +433,17 @@
 <section id="built">
   <div class="wrap reveal">
     <div class="eyebrow">Built with</div>
-    <h2>The tools behind NimbleBuddy.</h2>
+    <h2>The tools behind ServerBuddy.</h2>
     <div class="grid">
       <div class="card">
         <div class="icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></div>
-        <h3>Nimbleway</h3>
-        <p>Live web search inside the product. Anna calls Nimbleway's MCP server whenever she needs fresh facts.</p>
+        <h3>Serverpod</h3>
+        <p>The Dart backend: a <code>Memory</code> model in <code>.spy.yaml</code>, a type-safe <code>MemoryEndpoint</code> and Postgres ORM, deployed on Serverpod Cloud.</p>
+      </div>
+      <div class="card">
+        <div class="icon"><svg viewBox="0 0 24 24"><path d="M14 3 4 13l3 3L20 3zM14 13l-4 4 4 4h6l-4-4 4-4z"/></svg></div>
+        <h3>Flutter</h3>
+        <p>The app UI. It calls the server through Serverpod's generated client — <code>client.memory.remember(...)</code> — with no hand-written REST code.</p>
       </div>
       <div class="card">
         <div class="icon"><svg viewBox="0 0 24 24"><path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M18.4 5.6 5.6 18.4"/></svg></div>
@@ -444,12 +453,12 @@
       <div class="card">
         <div class="icon"><svg viewBox="0 0 24 24"><path d="M12 2c1 5 5 9 10 10-5 1-9 5-10 10-1-5-5-9-10-10 5-1 9-5 10-10z"/></svg></div>
         <h3>Gemini</h3>
-        <p>Used during development of NimbleBuddy.</p>
+        <p>Used during development of ServerBuddy.</p>
       </div>
       <div class="card">
         <div class="icon"><svg viewBox="0 0 24 24"><path d="M12 2 4 22l8-5 8 5z"/></svg></div>
         <h3>Antigravity</h3>
-        <p>Used as a development environment while building NimbleBuddy.</p>
+        <p>Used as a development environment while building ServerBuddy.</p>
       </div>
     </div>
   </div>
@@ -459,16 +468,16 @@
   <div class="wrap reveal">
     <div class="eyebrow">Run it</div>
     <h2>Try Anna on your machine.</h2>
-    <p class="sub">You'll need real-time voice credentials (App ID + Certificate), and a Nimbleway API key for web search.</p>
+    <p class="sub">You'll need real-time voice credentials (App ID + Certificate), and a web search API key.</p>
     <div class="run">
       <div class="card">
         <h3>1 · Web app</h3>
         <p>Clone, add your keys to <code>server/.env.local</code>, start both servers, open <code>localhost:3000</code>.</p>
-<pre>git clone https://github.com/vim719/NimbleBuddy
-cd NimbleBuddy
+<pre>git clone https://github.com/vim719/ServerBuddy
+cd ServerBuddy
 bun run setup
 <span class="c"># add your voice App ID, App Certificate</span>
-<span class="c"># and Nimbleway API key to server/.env.local</span>
+<span class="c"># and web search API key to server/.env.local</span>
 bun run dev</pre>
       </div>
       <div class="card">
@@ -480,14 +489,14 @@ bun install &amp;&amp; bun run build
 <span class="c"># → Load unpacked → extension/dist</span></pre>
       </div>
     </div>
-    <p class="note"><b>Why no live demo link?</b> Anna's backend holds the voice App Certificate and API keys, so it runs server-side rather than on GitHub Pages. Clone and run locally in about two minutes.</p>
+    <p class="note"><b>Live on Serverpod Cloud:</b> the Serverpod server and Flutter app run at <a href="https://serverbuddy.serverpod.space/">serverbuddy.serverpod.space</a>. Run the Serverpod project locally with <code>cd serverbuddy &amp;&amp; serverpod start</code>.</p>
   </div>
 </section>
 
 <footer>
   <div class="wrap">
-    <span><span class="dots" aria-hidden="true"><i style="background:#ff595e"></i><i style="background:#ffca3a"></i><i style="background:#8ac926"></i><i style="background:#1982c4"></i><i style="background:#6a4c93"></i></span>NimbleBuddy · powered by Nimbleway · built with Claude, Gemini &amp; Antigravity</span>
-    <a href="https://github.com/vim719/NimbleBuddy">github.com/vim719/NimbleBuddy</a>
+    <span><span class="dots" aria-hidden="true"><i style="background:#ff595e"></i><i style="background:#ffca3a"></i><i style="background:#8ac926"></i><i style="background:#1982c4"></i><i style="background:#6a4c93"></i></span>ServerBuddy · built with Flutter</span>
+    <a href="https://serverpod.dev">Powered by Serverpod</a>
   </div>
 </footer>
 
