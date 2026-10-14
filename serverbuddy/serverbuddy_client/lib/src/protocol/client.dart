@@ -12,12 +12,66 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _ida;
 import 'package:http/http.dart' as _i85jenna;
+import 'package:serverbuddy_client/src/protocol/agent/agent_models.dart'
+    as _ing1ky56;
 import 'package:serverbuddy_client/src/protocol/greetings/greeting.dart'
     as _i3it4xdx;
 import 'package:serverbuddy_client/src/protocol/memories/memory.dart'
     as _i6ww7ycq;
 import 'package:serverpod_client/serverpod_client.dart' as _isc;
 import 'protocol.dart' as _il2as5qe;
+
+/// Starts and stops Anna, the real-time voice companion, through Agora's
+/// Conversational AI REST API, with cross-session memory in Postgres.
+/// Accessed from the app through `client.agent`.
+/// {@category Endpoint}
+class EndpointAgent extends _isc.EndpointRef {
+  EndpointAgent(_isc.EndpointCaller caller) : super(caller);
+
+  @override
+  String get name => 'agent';
+
+  /// Generates the connection config for a new call (or renews a token when
+  /// [channel] and [uid] are passed).
+  _ida.Future<_ing1ky56.VoiceConfig> getConfig({
+    String? channel,
+    int? uid,
+  }) => caller.callServerEndpoint<_ing1ky56.VoiceConfig>(
+    'agent',
+    'getConfig',
+    {
+      'channel': channel,
+      'uid': uid,
+    },
+  );
+
+  /// Starts Anna in [channelName]. When [userKey] (the user's name) is given,
+  /// her memory of past conversations with that name is injected.
+  /// Returns the agent id.
+  _ida.Future<String> startAgent(
+    String channelName,
+    int agentUid,
+    int userUid, {
+    String? userKey,
+  }) => caller.callServerEndpoint<String>(
+    'agent',
+    'startAgent',
+    {
+      'channelName': channelName,
+      'agentUid': agentUid,
+      'userUid': userUid,
+      'userKey': userKey,
+    },
+  );
+
+  /// Captures the conversation into memory, then stops Anna.
+  _ida.Future<void> stopAgent(String agentId) =>
+      caller.callServerEndpoint<void>(
+        'agent',
+        'stopAgent',
+        {'agentId': agentId},
+      );
+}
 
 /// This is an example endpoint that returns a greeting message through
 /// its [hello] method.
@@ -102,9 +156,12 @@ class Client extends _isc.ServerpodClientShared {
              disconnectStreamsOnLostInternetConnection,
          httpClientOverride: httpClientOverride,
        ) {
+    agent = EndpointAgent(this);
     greeting = EndpointGreeting(this);
     memory = EndpointMemory(this);
   }
+
+  late final EndpointAgent agent;
 
   late final EndpointGreeting greeting;
 
@@ -112,6 +169,7 @@ class Client extends _isc.ServerpodClientShared {
 
   @override
   Map<String, _isc.EndpointRef> get endpointRefLookup => {
+    'agent': agent,
     'greeting': greeting,
     'memory': memory,
   };

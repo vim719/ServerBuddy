@@ -1,0 +1,7 @@
+### One remembered conversation turn.
+class: MemoryTurn
+fields:
+  ### "user" or "assistant"
+  role: String
+  ### What was said
+  content: String

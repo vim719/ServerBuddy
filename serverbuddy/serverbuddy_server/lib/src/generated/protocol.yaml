@@ -1,3 +1,7 @@
+agent:
+  - getConfig:
+  - startAgent:
+  - stopAgent:
 greeting:
   - hello:
 memory:

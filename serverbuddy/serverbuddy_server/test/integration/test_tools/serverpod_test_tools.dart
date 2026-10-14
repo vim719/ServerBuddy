@@ -13,6 +13,8 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _ida;
 import 'dart:io' as _idi;
+import 'package:serverbuddy_server/src/generated/agent/agent_models.dart'
+    as _isqxtsts;
 import 'package:serverbuddy_server/src/generated/greetings/greeting.dart'
     as _iv97wbkc;
 import 'package:serverbuddy_server/src/generated/memories/memory.dart'
@@ -152,6 +154,8 @@ void withServerpod(
 }
 
 class TestEndpoints {
+  late final _AgentEndpoint agent;
+
   late final _GreetingEndpoint greeting;
 
   late final _MemoryEndpoint memory;
@@ -164,6 +168,10 @@ class _InternalTestEndpoints extends TestEndpoints
     _is.SerializationManager serializationManager,
     _is.EndpointDispatch endpoints,
   ) {
+    agent = _AgentEndpoint(
+      endpoints,
+      serializationManager,
+    );
     greeting = _GreetingEndpoint(
       endpoints,
       serializationManager,
@@ -172,6 +180,122 @@ class _InternalTestEndpoints extends TestEndpoints
       endpoints,
       serializationManager,
     );
+  }
+}
+
+class _AgentEndpoint {
+  _AgentEndpoint(
+    this._endpointDispatch,
+    this._serializationManager,
+  );
+
+  final _is.EndpointDispatch _endpointDispatch;
+
+  final _is.SerializationManager _serializationManager;
+
+  _ida.Future<_isqxtsts.VoiceConfig> getConfig(
+    _ist.TestSessionBuilder sessionBuilder, {
+    String? channel,
+    int? uid,
+  }) async {
+    return _ist.callAwaitableFunctionAndHandleExceptions(() async {
+      var _localUniqueSession =
+          (sessionBuilder as _ist.InternalTestSessionBuilder).internalBuild(
+            endpoint: 'agent',
+            method: 'getConfig',
+          );
+      try {
+        var _localCallContext = await _endpointDispatch.getMethodCallContext(
+          createSessionCallback: (_) => _localUniqueSession,
+          endpointPath: 'agent',
+          methodName: 'getConfig',
+          parameters: _ist.testObjectToJson({
+            'channel': channel,
+            'uid': uid,
+          }),
+          serializationManager: _serializationManager,
+        );
+        var _localReturnValue =
+            await (_localCallContext.method.call(
+                  _localUniqueSession,
+                  _localCallContext.arguments,
+                )
+                as _ida.Future<_isqxtsts.VoiceConfig>);
+        return _localReturnValue;
+      } finally {
+        await _localUniqueSession.close();
+      }
+    });
+  }
+
+  _ida.Future<String> startAgent(
+    _ist.TestSessionBuilder sessionBuilder,
+    String channelName,
+    int agentUid,
+    int userUid, {
+    String? userKey,
+  }) async {
+    return _ist.callAwaitableFunctionAndHandleExceptions(() async {
+      var _localUniqueSession =
+          (sessionBuilder as _ist.InternalTestSessionBuilder).internalBuild(
+            endpoint: 'agent',
+            method: 'startAgent',
+          );
+      try {
+        var _localCallContext = await _endpointDispatch.getMethodCallContext(
+          createSessionCallback: (_) => _localUniqueSession,
+          endpointPath: 'agent',
+          methodName: 'startAgent',
+          parameters: _ist.testObjectToJson({
+            'channelName': channelName,
+            'agentUid': agentUid,
+            'userUid': userUid,
+            'userKey': userKey,
+          }),
+          serializationManager: _serializationManager,
+        );
+        var _localReturnValue =
+            await (_localCallContext.method.call(
+                  _localUniqueSession,
+                  _localCallContext.arguments,
+                )
+                as _ida.Future<String>);
+        return _localReturnValue;
+      } finally {
+        await _localUniqueSession.close();
+      }
+    });
+  }
+
+  _ida.Future<void> stopAgent(
+    _ist.TestSessionBuilder sessionBuilder,
+    String agentId,
+  ) async {
+    return _ist.callAwaitableFunctionAndHandleExceptions(() async {
+      var _localUniqueSession =
+          (sessionBuilder as _ist.InternalTestSessionBuilder).internalBuild(
+            endpoint: 'agent',
+            method: 'stopAgent',
+          );
+      try {
+        var _localCallContext = await _endpointDispatch.getMethodCallContext(
+          createSessionCallback: (_) => _localUniqueSession,
+          endpointPath: 'agent',
+          methodName: 'stopAgent',
+          parameters: _ist.testObjectToJson({'agentId': agentId}),
+          serializationManager: _serializationManager,
+        );
+        var _localReturnValue =
+            await (_localCallContext.method.call(
+                  _localUniqueSession,
+                  _localCallContext.arguments,
+                )
+                as _ida.Future<void>);
+        return _localReturnValue;
+      } finally {
+        await _localUniqueSession.close();
+      }
+    });
   }
 }
 

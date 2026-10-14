@@ -1,0 +1,18 @@
+### A running voice agent, kept so stop can capture memory even after a restart.
+class: AgentSession
+table: agent_sessions
+fields:
+  ### The id Agora returned for the running agent
+  agentId: String
+  ### The channel the agent joined
+  channel: String
+  ### The agent's numeric RTC uid
+  agentUid: int
+  ### The user's name (memory key), or null when anonymous
+  userKey: String?
+  ### When the agent was started
+  startedAt: DateTime
+indexes:
+  agent_session_agent_id_idx:
+    fields: agentId
+    unique: true

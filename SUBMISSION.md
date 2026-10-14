@@ -1,23 +1,30 @@
 # ServerBuddy — Hackathon Submission
 
 **Code repository:** https://github.com/vim719/ServerBuddy
-**Live app:** https://serverbuddy.serverpod.space (API: https://serverbuddy.api.serverpod.space)
+**Live app (talk to Anna):** https://serverbuddy.serverpod.space
+**Showcase page:** https://vim719.github.io/ServerBuddy/
 **Demo video:** <paste YouTube/Loom link, max 2 min>
 
 ## Project description
 
-ServerBuddy is a voice companion named **Anna** that talks with you in real time, researches the live web, and gives cited stock and crypto "market pulse" outlooks. What makes Anna feel like a buddy rather than a chatbot is **long-term memory**: she remembers what you tell her between conversations.
+ServerBuddy is a real-time voice companion named **Anna**. You talk to her out loud in the browser; she answers in about a second, searches the live web when she needs fresh facts, and remembers you between calls. Tell her your name and your next call picks up where the last one left off.
 
-**How it uses Serverpod:** Anna's memory runs on a Serverpod 4 backend. A `Memory` model defined in `memory.spy.yaml` (`table: memories`) becomes a shared, type-safe Dart class plus a generated ORM (`Memory.db`) backed by Postgres. A `MemoryEndpoint` exposes `remember`, `getMemories` and `forget`, which insert, query (newest first), and delete rows with `Memory.db.insertRow / find / deleteRow`. Schema changes ship as versioned Serverpod migrations. The server, its managed Postgres database, and the Flutter web build are all deployed with `serverpod cloud launch` on **Serverpod Cloud**.
+**How it uses Serverpod:** The whole backend is a Serverpod 4 server written in Dart, hosted on **Serverpod Cloud**.
+- An `AgentEndpoint` replaces the original Python service. `getConfig` mints Agora AccessToken2 voice tokens in pure Dart; a unit test checks them byte-for-byte against Agora's official SDK. `startAgent` launches Anna's voice pipeline (speech-to-text → LLM → text-to-speech) through Agora's Conversational AI REST API. `stopAgent` saves the conversation and ends the call.
+- Anna's memory uses Serverpod models: `ConversationMemory` (a table with a `List<MemoryTurn>` field) is read with `ConversationMemory.db` and re-injected into her prompt on the next call. Updates run inside a database transaction. Running agents are tracked in an `AgentSession` table, so a call can still be ended and remembered after a server restart.
+- API keys are Serverpod passwords (`passwords.yaml` locally, `scloud password set` in the cloud), so they never reach the client. Schema changes ship as Serverpod migrations.
 
-**How it uses Flutter:** The `serverbuddy_flutter` app calls the backend through the generated client (`client.memory.remember(...)`, `client.memory.getMemories()`), with no REST code or JSON handling written by hand. It shows your saved memories in a list, lets you add new ones or forget old ones, and adapts its layout for phone and desktop. The same codebase targets web, iOS, Android and desktop.
+**How it uses Flutter:** The app is a Flutter web app served by Serverpod.
+- It calls the server through the generated, type-safe client: `client.agent.getConfig()`, `client.agent.startAgent(...)`, `client.agent.stopAgent(...)`. There is no hand-written REST code.
+- The "Meet Anna" screen, the voice orb that reacts to Anna's and your voice levels, the live transcript, and the mute and end-call controls are all Flutter widgets.
+- Audio streaming uses Agora's browser SDK through a small `dart:js_interop` bridge.
 
-The stack is Dart from database to UI: the endpoint signatures on the server are the API contract, and if they change, the Flutter app gets a compile-time error rather than a runtime bug.
+Dart runs end to end, from the Postgres tables to the call screen. One `serverpod start` runs the full stack locally, and one `serverpod cloud launch` deploys it.
 
 ## 2-minute demo script
 
-1. (0:00–0:15) Landing page: Serverpod branding top-left and bottom-right, "Built with Flutter" footnote. "This is ServerBuddy, Anna, a voice companion with memory."
-2. (0:15–0:45) Talk to Anna briefly; show the Market Pulse page.
-3. (0:45–1:20) Open the Flutter app at the serverpod.space URL. Type "I prefer morning market briefings" and click Remember. It appears in the list. Reload the page: it is still there, loaded from Postgres.
-4. (1:20–1:45) Show `memory.spy.yaml` and `memory_endpoint.dart`, then the `client.memory.remember` call in Flutter.
-5. (1:45–2:00) Show the Serverpod Cloud Console Logs/Sessions tab and the deploy command.
+1. (0:00–0:15) The showcase page: "Meet Anna", Serverpod top-left and bottom-right, Flutter in the footer. Click "Talk to Anna live".
+2. (0:15–1:00) Enter your name and start the conversation. Anna greets you; tell her something about yourself and ask a current-events question (she searches the web). Point out the live transcript and voice orb.
+3. (1:00–1:25) End the call, start a new one with the same name. Anna remembers you.
+4. (1:25–1:50) Show `agent_endpoint.dart`, `conversation_memory.spy.yaml`, and `client.agent.startAgent` in the Flutter code.
+5. (1:50–2:00) Show the Serverpod Cloud Console logs: `agent.startAgent` and `agent.stopAgent`.

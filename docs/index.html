@@ -288,7 +288,7 @@
     <h1 aria-label="Meet Anna, the voice buddy who remembers you."><span class="letters" aria-hidden="true">Meet </span><span class="anna">Anna</span><span class="letters" aria-hidden="true">, the voice buddy who remembers you.</span></h1>
     <p class="lede">ServerBuddy is a voice-first AI companion built on Serverpod and Flutter. Talk to Anna out loud — she answers in under a second, picks up where your last call left off, and looks things up on the live web.</p>
     <div class="cta">
-      <a class="btn btn-primary" href="https://serverbuddy.serverpod.space/">Open the live app →</a>
+      <a class="btn btn-primary" href="https://serverbuddy.serverpod.space/">Talk to Anna live →</a>
       <a class="btn btn-ghost" href="https://github.com/vim719/ServerBuddy">View the code</a>
       <a class="btn btn-ghost" href="assets/serverbuddy-extension.zip" download>Download Chrome extension</a>
       <a class="btn btn-ghost" href="#run">Run it locally</a>
@@ -368,7 +368,7 @@
       <div class="step"><b>Replies</b><span>MiniMax TTS speaks back in real time.</span></div>
     </div>
 
-    <div class="arch" role="img" aria-label="Architecture: the web app or Chrome extension talks to a FastAPI backend, which starts a real-time voice agent that uses Deepgram, OpenAI, live web search and MiniMax; a Serverpod server with a Flutter app stores memories in Postgres.">
+    <div class="arch" role="img" aria-label="Architecture: the Flutter web app or Chrome extension talks to a Serverpod backend, which starts a real-time voice agent that uses Deepgram, OpenAI, live web search and MiniMax; memory is stored in Postgres through the Serverpod ORM.">
       <svg viewBox="0 0 900 260" xmlns="http://www.w3.org/2000/svg" font-family="Instrument Sans, sans-serif">
         <defs>
           <linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#1982c4"/><stop offset="1" stop-color="#6a4c93"/></linearGradient>
@@ -382,16 +382,16 @@
           <rect x="300" y="196" width="200" height="48" rx="12"/>
         </g>
         <g fill="#14161f" font-size="15" font-weight="600">
-          <text x="115" y="72" text-anchor="middle">Web app</text>
+          <text x="115" y="72" text-anchor="middle">Flutter app</text>
           <text x="115" y="180" text-anchor="middle">Chrome extension</text>
-          <text x="400" y="126" text-anchor="middle">FastAPI backend</text>
+          <text x="400" y="126" text-anchor="middle">Serverpod backend</text>
           <text x="735" y="50" text-anchor="middle">Real-time voice agent</text>
-          <text x="400" y="225" text-anchor="middle">SQLite memory</text>
+          <text x="400" y="225" text-anchor="middle">Postgres memory</text>
         </g>
         <g fill="#5b6172" font-size="12.5">
-          <text x="115" y="94" text-anchor="middle">Next.js · RTC + RTM</text>
+          <text x="115" y="94" text-anchor="middle">Flutter web · RTC + RTM</text>
           <text x="115" y="202" text-anchor="middle">Manifest V3 · React</text>
-          <text x="400" y="148" text-anchor="middle">tokens · agent lifecycle</text>
+          <text x="400" y="148" text-anchor="middle">Dart · tokens · agent lifecycle</text>
         </g>
         <g font-size="13" fill="#14161f">
           <rect x="612" y="72" width="246" height="34" rx="9" fill="#f7f8fb" stroke="#e7e9f0"/>
@@ -422,9 +422,7 @@
       <span class="chip"><b>Serverpod Cloud</b> hosting</span>
       <span class="chip"><b>MCP</b> web search</span>
       <span class="chip"><b>Deepgram</b> · <b>OpenAI</b> · <b>MiniMax</b> voice pipeline</span>
-      <span class="chip"><b>Next.js 16</b> · React 19</span>
-      <span class="chip"><b>FastAPI</b> · Python</span>
-      <span class="chip"><b>SQLite</b> memory</span>
+                  <span class="chip"><b>Postgres</b> memory via Serverpod ORM</span>
       <span class="chip"><b>Chrome</b> Manifest V3</span>
     </div>
   </div>
@@ -471,14 +469,13 @@
     <p class="sub">You'll need real-time voice credentials (App ID + Certificate), and a web search API key.</p>
     <div class="run">
       <div class="card">
-        <h3>1 · Web app</h3>
-        <p>Clone, add your keys to <code>server/.env.local</code>, start both servers, open <code>localhost:3000</code>.</p>
+        <h3>1 · Serverpod + Flutter app</h3>
+        <p>Clone, add your keys to <code>serverbuddy_server/config/passwords.yaml</code>, then start the server and Flutter app with one command.</p>
 <pre>git clone https://github.com/vim719/ServerBuddy
-cd ServerBuddy
-bun run setup
-<span class="c"># add your voice App ID, App Certificate</span>
-<span class="c"># and web search API key to server/.env.local</span>
-bun run dev</pre>
+cd ServerBuddy/serverbuddy
+<span class="c"># under development: in passwords.yaml add</span>
+<span class="c"># agoraAppId, agoraAppCertificate, webSearchApiKey</span>
+serverpod start</pre>
       </div>
       <div class="card">
         <h3>2 · Chrome extension</h3>

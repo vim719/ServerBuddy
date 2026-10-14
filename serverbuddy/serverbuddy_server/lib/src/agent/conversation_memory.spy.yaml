@@ -1,0 +1,14 @@
+### Anna's cross-session memory for one user, re-injected on their next call.
+class: ConversationMemory
+table: conversation_memories
+fields:
+  ### The name the user gave (lowercased)
+  userKey: String
+  ### The most recent turns, oldest first
+  turns: List<MemoryTurn>
+  ### When the memory was last updated
+  updatedAt: DateTime
+indexes:
+  conversation_memory_user_key_idx:
+    fields: userKey
+    unique: true

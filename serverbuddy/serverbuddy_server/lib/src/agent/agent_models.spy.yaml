@@ -1,0 +1,13 @@
+### Connection details the app needs to join a voice call with Anna.
+class: VoiceConfig
+fields:
+  ### Agora App ID
+  appId: String
+  ### RTC + RTM token for the user
+  token: String
+  ### The user's numeric RTC uid, as a string
+  uid: String
+  ### The channel to join
+  channelName: String
+  ### The numeric RTC uid Anna will join with, as a string
+  agentUid: String
