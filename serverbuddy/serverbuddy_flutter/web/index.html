@@ -41,6 +41,20 @@
     For more details:
     * https://docs.flutter.dev/platform-integration/web/initialization
   -->
+  <script>
+    // Drop any service worker and caches left by earlier versions of the app,
+    // so every visitor gets the current build.
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then((regs) => {
+        if (regs.length) {
+          Promise.all(regs.map((r) => r.unregister()))
+            .then(() => (window.caches ? caches.keys() : []))
+            .then((keys) => Promise.all(keys.map((k) => caches.delete(k))))
+            .then(() => location.reload());
+        }
+      });
+    }
+  </script>
   <script src="agora/AgoraRTC_N-production.js"></script>
   <script src="agora/agora-rtm.js"></script>
   <script src="anna_voice.js"></script>
